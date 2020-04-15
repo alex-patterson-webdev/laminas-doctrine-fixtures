@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff21b3853cbcce7b808fe7f2ab225ba6",
+    "content-hash": "1c2880fd56b3953e3c4eca3b65bd56c8",
     "packages": [
         {
             "name": "alex-patterson-webdev/laminas-factory",
-            "version": "dev-master",
+            "version": "dev-feature/1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alex-patterson-webdev/laminas-factory.git",
-                "reference": "153a9af74770c97aaa3a63672743c04cb367c40a"
+                "reference": "b362d866a8c025b9fa73348450ed1237014e808c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alex-patterson-webdev/laminas-factory/zipball/153a9af74770c97aaa3a63672743c04cb367c40a",
-                "reference": "153a9af74770c97aaa3a63672743c04cb367c40a",
+                "url": "https://api.github.com/repos/alex-patterson-webdev/laminas-factory/zipball/b362d866a8c025b9fa73348450ed1237014e808c",
+                "reference": "b362d866a8c025b9fa73348450ed1237014e808c",
                 "shasum": ""
             },
             "require": {
@@ -35,7 +35,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2020-04-05T13:27:26+00:00"
+            "time": "2020-04-14T13:00:23+00:00"
         },
         {
             "name": "container-interop/container-interop",

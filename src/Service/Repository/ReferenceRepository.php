@@ -32,7 +32,7 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
      */
     public function getCollectionReference(string $name): iterable
     {
-        if (! $this->getCollectionReference($name)) {
+        if (! $this->hasCollectionReference($name)) {
             throw new \OutOfBoundsException(sprintf('Collection reference to "%s" does not exist', $name));
         }
         return $this->collectionReferences[$name];
@@ -56,7 +56,7 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
      */
     public function addCollectionReference(string $name, iterable $collection): void
     {
-        if (isset($this->collectionReferences[$name])) {
+        if ($this->hasCollectionReference($name)) {
             throw new \BadMethodCallException(
                 sprintf(
                     'Reference to "%s" already exists, use method setCollectionReference in order to override it',

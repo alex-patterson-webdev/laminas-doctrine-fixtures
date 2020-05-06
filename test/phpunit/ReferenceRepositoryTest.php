@@ -35,4 +35,27 @@ final class ReferenceRepositoryTest extends TestCase
 
         $this->assertInstanceOf(\Doctrine\Common\DataFixtures\ReferenceRepository::class, $referenceRepository);
     }
+
+    /**
+     * Assert a collection reference can be set and get on a ReferenceRepository via
+     * setCollectionReference() and getCollectionReference().
+     *
+     * @covers \Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository::setCollectionReference
+     * @covers \Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository::getCollectionReference
+     */
+    public function testSetAndGetCollectionReference(): void
+    {
+        $collectionReference = new ReferenceRepository($this->objectManager);
+
+        /** @var \stdClass[] $data */
+        $data = [
+            new \stdClass(),
+            new \stdClass(),
+            new \stdClass(),
+        ];
+
+        $collectionReference->setCollectionReference('foo', $data);
+
+        $this->assertSame($data, $collectionReference->getCollectionReference('foo'));
+    }
 }

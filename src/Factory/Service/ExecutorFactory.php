@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arp\LaminasDoctrineFixtures\Factory\Service;
 
 use Arp\LaminasDoctrineFixtures\Service\Executor;
+use Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository;
 use Arp\LaminasFactory\AbstractFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,9 +31,13 @@ final class ExecutorFactory extends AbstractFactory
         $entityManager = $options['entity_manager'] ?? EntityManagerInterface::class;
         $purger = $options['purger'] ?? ORMPurger::class;
 
-        return new Executor(
+        $executor = new Executor(
             $this->getService($container, $entityManager, $requestedName),
             $this->getService($container, $purger, $requestedName)
         );
+
+        $executor->setReferenceRepository(new ReferenceRepository($entityManager));
+
+        return $executor;
     }
 }

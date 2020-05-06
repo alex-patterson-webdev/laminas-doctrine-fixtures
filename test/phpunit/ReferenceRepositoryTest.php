@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Arp\LaminasDoctrineFixtures\Service\Repository;
 

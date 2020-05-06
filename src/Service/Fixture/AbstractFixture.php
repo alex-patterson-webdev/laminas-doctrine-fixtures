@@ -18,14 +18,6 @@ abstract class AbstractFixture extends \Doctrine\Common\DataFixtures\AbstractFix
     protected $referenceRepository;
 
     /**
-     * @param ReferenceRepository $referenceRepository
-     */
-    public function __construct(ReferenceRepository $referenceRepository)
-    {
-        $this->referenceRepository = $referenceRepository;
-    }
-
-    /**
      * @param string $name
      *
      * @return bool

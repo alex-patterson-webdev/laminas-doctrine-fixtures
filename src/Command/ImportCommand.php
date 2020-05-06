@@ -90,5 +90,7 @@ class ImportCommand extends Command
         $this->executor->execute($this->fixtures, $input->getOption('append') ? true : false);
 
         $output->writeln(sprintf('Completed execution of \'%d\' fixtures', count($this->fixtures)));
+
+        return 0;
     }
 }

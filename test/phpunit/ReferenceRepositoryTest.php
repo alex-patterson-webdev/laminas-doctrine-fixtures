@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arp\LaminasDoctrineFixtures\Service\Repository;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\UnitOfWork;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -45,17 +46,39 @@ final class ReferenceRepositoryTest extends TestCase
      */
     public function testSetAndGetCollectionReference(): void
     {
-        $collectionReference = new ReferenceRepository($this->objectManager);
+        /** @var ReferenceRepository|MockObject $collectionReference */
+        $collectionReference = $this->getMockBuilder(ReferenceRepository::class)
+            ->setConstructorArgs([$this->objectManager])
+            ->onlyMethods(['setReference', 'getReference'])
+            ->getMock();
+
+        $collectionName = 'FooCollection';
 
         /** @var \stdClass[] $data */
         $data = [
-            new \stdClass(),
-            new \stdClass(),
-            new \stdClass(),
+            'A' => new \stdClass(),
+            'B' => new \stdClass(),
+            'C' => new \stdClass(),
         ];
 
-        $collectionReference->setCollectionReference('foo', $data);
+        $setReferenceArgs = $getReferenceArgs = [];
+        foreach ($data as $index => $item) {
+            $itemName = $collectionName . '.' . $index;
+            $setReferenceArgs[] = [$itemName, $item];
+            $getReferenceArgs[] = [$itemName];
+        }
 
-        $this->assertSame($data, $collectionReference->getCollectionReference('foo'));
+        $collectionReference->expects($this->exactly(count($setReferenceArgs)))
+            ->method('setReference')
+            ->withConsecutive(...$setReferenceArgs);
+
+        $collectionReference->expects($this->exactly(count($setReferenceArgs)))
+            ->method('getReference')
+            ->withConsecutive(...$getReferenceArgs)
+            ->willReturn(...array_values($data));
+
+        $collectionReference->setCollectionReference($collectionName, $data);
+
+        $this->assertSame($data, $collectionReference->getCollectionReference($collectionName));
     }
 }

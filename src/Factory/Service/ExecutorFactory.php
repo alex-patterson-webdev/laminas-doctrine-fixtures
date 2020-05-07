@@ -31,11 +31,16 @@ final class ExecutorFactory extends AbstractFactory
         $entityManager = $options['entity_manager'] ?? EntityManagerInterface::class;
         $purger = $options['purger'] ?? ORMPurger::class;
 
-        $executor = new Executor(
-            $this->getService($container, $entityManager, $requestedName),
-            $this->getService($container, $purger, $requestedName)
-        );
+        /** @var EntityManagerInterface|string */
+        if (is_string($entityManager)) {
+            $entityManager = $this->getService($container, $entityManager, $requestedName);
+        }
 
+        if (null !== $purger && is_string($purger)) {
+            $purger = $this->getService($container, $purger, $requestedName);
+        }
+
+        $executor = new Executor($entityManager, $purger);
         $executor->setReferenceRepository(new ReferenceRepository($entityManager));
 
         return $executor;

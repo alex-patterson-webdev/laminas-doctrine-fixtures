@@ -7,8 +7,8 @@
     colors="true"
 >
     <testsuites>
-        <testsuite name="EventDispatcher">
-            <directory>./test</directory>
+        <testsuite name="LaminasDoctrineFixtures">
+            <directory>./test/phpunit</directory>
         </testsuite>
     </testsuites>
     <filter>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arp\LaminasDoctrineFixtures\Service\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
  * @package Arp\LaminasDoctrineFixtures\Service\Repository
@@ -11,7 +13,7 @@ namespace Arp\LaminasDoctrineFixtures\Service\Repository;
 class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceRepository
 {
     /**
-     * @var iterable|array
+     * @var array
      */
     private $collectionReferences = [];
 
@@ -32,12 +34,17 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
      */
     public function getCollectionReference(string $name): iterable
     {
-        if (! $this->getCollectionReference($name)) {
+        if (! $this->hasCollectionReference($name)) {
             throw new \OutOfBoundsException(sprintf('Collection reference to "%s" does not exist', $name));
         }
-        return $this->collectionReferences[$name];
-    }
 
+        $collection = [];
+        foreach ($this->collectionReferences[$name] as $index => $reference) {
+            $collection[$index] = $this->getReference($reference);
+        }
+
+        return $collection;
+    }
 
     /**
      * @param string   $name
@@ -45,7 +52,11 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
      */
     public function setCollectionReference(string $name, iterable $collection): void
     {
-        $this->collectionReferences[$name] = $collection;
+        foreach ($collection as $index => $item) {
+            $itemName = $name . '.' . $index;
+            $this->setReference($itemName, $item);
+            $this->collectionReferences[$name][$index] = $itemName;
+        }
     }
 
     /**
@@ -56,7 +67,7 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
      */
     public function addCollectionReference(string $name, iterable $collection): void
     {
-        if (isset($this->collectionReferences[$name])) {
+        if ($this->hasCollectionReference($name)) {
             throw new \BadMethodCallException(
                 sprintf(
                     'Reference to "%s" already exists, use method setCollectionReference in order to override it',

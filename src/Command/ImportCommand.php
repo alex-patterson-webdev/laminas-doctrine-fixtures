@@ -79,7 +79,7 @@ class ImportCommand extends Command
     {
         $output->writeln('Executing data fixtures...');
 
-        $purgeMode = $input->getOption('purge-with-truncate');
+        $purgeMode = (int)$input->getOption('purge-with-truncate');
 
         if (null !== $this->purger && $purgeMode) {
             $output->writeln(sprintf('Purging existing database data'));

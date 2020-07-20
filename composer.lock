@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c2880fd56b3953e3c4eca3b65bd56c8",
+    "content-hash": "0c52bfb3c45fc61b8cd7a602a2d5e3d1",
     "packages": [
         {
             "name": "alex-patterson-webdev/laminas-factory",
-            "version": "dev-feature/1.0.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alex-patterson-webdev/laminas-factory.git",
-                "reference": "2fabcd40465489b8de581b36c8f76f26a237f587"
+                "reference": "dfb5007b98c079cd3a61be76897dd0ebf2538841"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alex-patterson-webdev/laminas-factory/zipball/2fabcd40465489b8de581b36c8f76f26a237f587",
-                "reference": "2fabcd40465489b8de581b36c8f76f26a237f587",
+                "url": "https://api.github.com/repos/alex-patterson-webdev/laminas-factory/zipball/dfb5007b98c079cd3a61be76897dd0ebf2538841",
+                "reference": "dfb5007b98c079cd3a61be76897dd0ebf2538841",
                 "shasum": ""
             },
             "require": {
@@ -37,7 +37,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2020-07-06T23:29:30+00:00"
+            "time": "2020-07-06T23:45:51+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -3869,13 +3869,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "alex-patterson-webdev/laminas-factory": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": ">=7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

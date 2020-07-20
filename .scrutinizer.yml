@@ -1,8 +1,5 @@
 build:
   nodes:
-    php73:
-      environment:
-        php: 7.3
     php74:
       environment:
         php: 7.4

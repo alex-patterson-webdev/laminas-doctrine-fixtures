@@ -16,24 +16,24 @@ return [
     'arp' => [
         'services' => [
             Loader::class => [
-                'fixtures'    => [],
+                'fixtures' => [],
                 'directories' => [],
             ],
             Executor::class => [
                 'entity_manager' => 'doctrine.entitymanager.orm_default',
-                'purger'         => Purger::class,
+                'purger' => Purger::class,
             ],
             Purger::class => [
-                'entity_manager'       => 'doctrine.entitymanager.orm_default',
-                'mode'                 => ORMPurger::PURGE_MODE_DELETE,
+                'entity_manager' => 'doctrine.entitymanager.orm_default',
+                'mode' => ORMPurger::PURGE_MODE_DELETE,
                 'excluded_table_names' => [],
             ],
 
             // Cli Commands
             ImportCommand::class => [
-                'loader'   => Loader::class,
+                'loader' => Loader::class,
                 'executor' => Executor::class,
-                'purger'   => Purger::class,
+                'purger' => Purger::class,
             ],
         ],
     ],
@@ -43,9 +43,9 @@ return [
             ImportCommand::class => ImportCommandFactory::class,
 
             // DataFixtures components
-            Loader::class        => LoaderFactory::class,
-            Executor::class      => ExecutorFactory::class,
-            Purger::class        => PurgerFactory::class,
+            Loader::class => LoaderFactory::class,
+            Executor::class => ExecutorFactory::class,
+            Purger::class => PurgerFactory::class,
         ],
     ],
 ];

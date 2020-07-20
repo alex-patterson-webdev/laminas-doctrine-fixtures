@@ -20,7 +20,7 @@ final class ImportCommandFactory extends AbstractFactory
     /**
      * @var string
      */
-    private $defaultClassName = ImportCommand::class;
+    private string $defaultClassName = ImportCommand::class;
 
     /**
      * @param ContainerInterface $container

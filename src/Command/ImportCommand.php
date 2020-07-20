@@ -21,17 +21,17 @@ class ImportCommand extends Command
     /**
      * @var FixtureInterface[]
      */
-    private $fixtures;
+    private array $fixtures;
 
     /**
      * @var Executor
      */
-    private $executor;
+    private Executor $executor;
 
     /**
      * @var ORMPurger|null
      */
-    private $purger;
+    private ?ORMPurger $purger;
 
     /**
      * @param FixtureInterface[] $fixtures
@@ -45,28 +45,6 @@ class ImportCommand extends Command
         $this->purger = $purger;
 
         parent::__construct();
-    }
-
-    /**
-     * Configure the command's options.
-     */
-    protected function configure(): void
-    {
-        parent::configure();
-
-        $this->setName('data-fixture:import')
-            ->setDescription('Import Data Fixtures')
-            ->setHelp('The import command Imports data-fixtures')
-            ->addOption('append', null, InputOption::VALUE_NONE, 'Append data to existing data.');
-
-        if (null !== $this->purger) {
-            $this->addOption(
-                'purge-with-truncate',
-                null,
-                InputOption::VALUE_NONE,
-                'Truncate tables before inserting data'
-            );
-        }
     }
 
     /**
@@ -92,5 +70,27 @@ class ImportCommand extends Command
         $output->writeln(sprintf('Completed execution of \'%d\' fixtures', count($this->fixtures)));
 
         return 0;
+    }
+
+    /**
+     * Configure the command's options.
+     */
+    protected function configure(): void
+    {
+        parent::configure();
+
+        $this->setName('data-fixture:import')
+            ->setDescription('Import Data Fixtures')
+            ->setHelp('The import command Imports data-fixtures')
+            ->addOption('append', null, InputOption::VALUE_NONE, 'Append data to existing data.');
+
+        if (null !== $this->purger) {
+            $this->addOption(
+                'purge-with-truncate',
+                null,
+                InputOption::VALUE_NONE,
+                'Truncate tables before inserting data'
+            );
+        }
     }
 }

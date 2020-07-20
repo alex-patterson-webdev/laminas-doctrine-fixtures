@@ -47,7 +47,7 @@ abstract class AbstractFixture extends \Doctrine\Common\DataFixtures\AbstractFix
     }
 
     /**
-     * @param string $name
+     * @param string   $name
      * @param iterable $collection
      */
     public function addCollectionReference(string $name, iterable $collection): void

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Arp\LaminasDoctrineFixtures\Service\Repository;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\UnitOfWork;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

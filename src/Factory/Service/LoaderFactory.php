@@ -29,13 +29,13 @@ final class LoaderFactory extends AbstractFactory
 
         $loader = new Loader();
 
-        if (! empty($options['directories'])) {
+        if (!empty($options['directories'])) {
             foreach ($options['directories'] as $directory) {
                 $loader->loadFromDirectory($directory);
             }
         }
 
-        if (! empty($options['fixtures'])) {
+        if (!empty($options['fixtures'])) {
             foreach ($this->getFixtures($container, $options['fixtures'], $requestedName) as $fixture) {
                 $loader->addFixture($fixture);
             }
@@ -68,7 +68,7 @@ final class LoaderFactory extends AbstractFactory
                 }
                 $fixture = $container->get($fixture);
             }
-            if (! $fixture instanceof FixtureInterface) {
+            if (!$fixture instanceof FixtureInterface) {
                 throw new ServiceNotCreatedException(
                     sprintf(
                         'The data fixture must be an object of type \'%s\'; \'%s\' provided in \'%s\'',

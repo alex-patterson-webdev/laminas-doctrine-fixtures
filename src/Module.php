@@ -43,8 +43,8 @@ class Module
 
         if (
             null === $container
-            || ! $container instanceof ContainerInterface
-            || ! $container->has(ImportCommand::class)
+            || !$container instanceof ContainerInterface
+            || !$container->has(ImportCommand::class)
         ) {
             return;
         }

@@ -10,6 +10,7 @@ use Arp\LaminasFactory\AbstractFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 
 /**
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
@@ -22,9 +23,12 @@ final class ExecutorFactory extends AbstractFactory
      * @param string             $requestedName
      * @param array|null         $options
      *
-     * @return object|void
+     * @return Executor
+     *
+     * @noinspection PhpMissingParamTypeInspection
+     * @throws ServiceNotCreatedException
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): Executor
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 

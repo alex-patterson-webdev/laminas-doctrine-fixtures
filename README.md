@@ -12,4 +12,4 @@ A Doctrine Data Fixtures integration module for the Laminas Framework.
 
 Installation via [composer](https://getcomposer.org).
 
-    require alex-patterson-webdev/laminas-doctrine-fixtures ^1
+    composer require alex-patterson-webdev/laminas-doctrine-fixtures ^0.2

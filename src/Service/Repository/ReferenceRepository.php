@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Arp\LaminasDoctrineFixtures\Service\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
  * @package Arp\LaminasDoctrineFixtures\Service\Repository
@@ -20,21 +18,11 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
     /**
      * @param string $name
      *
-     * @return bool
-     */
-    public function hasCollectionReference(string $name): bool
-    {
-        return array_key_exists($name, $this->collectionReferences);
-    }
-
-    /**
-     * @param string $name
-     *
      * @return iterable
      */
     public function getCollectionReference(string $name): iterable
     {
-        if (! $this->hasCollectionReference($name)) {
+        if (!$this->hasCollectionReference($name)) {
             throw new \OutOfBoundsException(sprintf('Collection reference to "%s" does not exist', $name));
         }
 
@@ -47,16 +35,13 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
     }
 
     /**
-     * @param string   $name
-     * @param iterable $collection
+     * @param string $name
+     *
+     * @return bool
      */
-    public function setCollectionReference(string $name, iterable $collection): void
+    public function hasCollectionReference(string $name): bool
     {
-        foreach ($collection as $index => $item) {
-            $itemName = $name . '.' . $index;
-            $this->setReference($itemName, $item);
-            $this->collectionReferences[$name][$index] = $itemName;
-        }
+        return array_key_exists($name, $this->collectionReferences);
     }
 
     /**
@@ -76,5 +61,18 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
             );
         }
         $this->setCollectionReference($name, $collection);
+    }
+
+    /**
+     * @param string   $name
+     * @param iterable $collection
+     */
+    public function setCollectionReference(string $name, iterable $collection): void
+    {
+        foreach ($collection as $index => $item) {
+            $itemName = $name . '.' . $index;
+            $this->setReference($itemName, $item);
+            $this->collectionReferences[$name][$index] = $itemName;
+        }
     }
 }

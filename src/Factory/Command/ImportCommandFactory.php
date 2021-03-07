@@ -10,6 +10,7 @@ use Arp\LaminasDoctrineFixtures\Service\Loader;
 use Arp\LaminasFactory\AbstractFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 
 /**
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
@@ -28,6 +29,10 @@ final class ImportCommandFactory extends AbstractFactory
      * @param array|null         $options
      *
      * @return ImportCommand
+     *
+     * @throws ServiceNotCreatedException
+     *
+     * @noinspection PhpMissingParamTypeInspection
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {

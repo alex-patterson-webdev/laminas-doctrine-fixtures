@@ -22,9 +22,11 @@ final class ExecutorFactory extends AbstractFactory
      * @param string             $requestedName
      * @param array|null         $options
      *
-     * @return object|void
+     * @return Executor
+     *
+     * @noinspection PhpMissingParamTypeInspection
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): Executor
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 

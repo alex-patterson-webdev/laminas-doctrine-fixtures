@@ -19,10 +19,12 @@ return [
                 'fixtures' => [],
                 'directories' => [],
             ],
+
             Executor::class => [
                 'entity_manager' => 'doctrine.entitymanager.orm_default',
                 'purger' => Purger::class,
             ],
+
             Purger::class => [
                 'entity_manager' => 'doctrine.entitymanager.orm_default',
                 'mode' => ORMPurger::PURGE_MODE_DELETE,

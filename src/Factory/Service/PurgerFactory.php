@@ -8,6 +8,7 @@ use Arp\LaminasFactory\AbstractFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 
 /**
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
@@ -21,6 +22,9 @@ final class PurgerFactory extends AbstractFactory
      * @param array|null         $options
      *
      * @return ORMPurger
+     *
+     * @noinspection PhpMissingParamTypeInspection
+     * @throws ServiceNotCreatedException
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): ORMPurger
     {

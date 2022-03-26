@@ -26,15 +26,13 @@ final class ImportCommandFactory extends AbstractFactory
     /**
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param array|null         $options
+     * @param array<mixed>|null  $options
      *
      * @return ImportCommand
      *
      * @throws ServiceNotCreatedException
-     *
-     * @noinspection PhpMissingParamTypeInspection
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, string $requestedName, array $options = null): ImportCommand
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 

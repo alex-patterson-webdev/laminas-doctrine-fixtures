@@ -51,21 +51,21 @@ class ImportCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|void|null
+     * @return int|null
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $output->writeln('Executing data fixtures...');
 
         $purgeMode = (int)$input->getOption('purge-with-truncate');
 
         if (null !== $this->purger && $purgeMode) {
-            $output->writeln(sprintf('Purging existing database data'));
+            $output->writeln('Purging existing database data');
 
             $this->purger->setPurgeMode((2 === $purgeMode) ? 2 : 1);
         }
 
-        $this->executor->execute($this->fixtures, $input->getOption('append') ? true : false);
+        $this->executor->execute($this->fixtures, (bool)$input->getOption('append'));
 
         $output->writeln(sprintf('Completed execution of \'%d\' fixtures', count($this->fixtures)));
 

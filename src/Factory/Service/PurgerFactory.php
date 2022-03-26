@@ -19,14 +19,13 @@ final class PurgerFactory extends AbstractFactory
     /**
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param array|null         $options
+     * @param array<mixed>|null  $options
      *
      * @return ORMPurger
      *
-     * @noinspection PhpMissingParamTypeInspection
      * @throws ServiceNotCreatedException
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): ORMPurger
+    public function __invoke(ContainerInterface $container, string $requestedName, array $options = null): ORMPurger
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 

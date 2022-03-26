@@ -21,14 +21,13 @@ final class ExecutorFactory extends AbstractFactory
     /**
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param array|null         $options
+     * @param array<mixed>|null  $options
      *
      * @return Executor
      *
-     * @noinspection PhpMissingParamTypeInspection
      * @throws ServiceNotCreatedException
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): Executor
+    public function __invoke(ContainerInterface $container, string $requestedName, array $options = null): Executor
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 
@@ -40,7 +39,7 @@ final class ExecutorFactory extends AbstractFactory
             $entityManager = $this->getService($container, $entityManager, $requestedName);
         }
 
-        if (null !== $purger && is_string($purger)) {
+        if (is_string($purger)) {
             $purger = $this->getService($container, $purger, $requestedName);
         }
 

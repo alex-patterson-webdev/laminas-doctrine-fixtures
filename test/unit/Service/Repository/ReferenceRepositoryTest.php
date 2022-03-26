@@ -2,20 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Arp\LaminasDoctrineFixtures\Service\Repository;
+namespace ArpTest\LaminasDoctrineFixtures\Service\Repository;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository;
+use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * @covers \Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository
+ *
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
- * @package Arp\LaminasDoctrineFixtures\Service\Repository
+ * @package ArpTest\LaminasDoctrineFixtures\Service\Repository
  */
 final class ReferenceRepositoryTest extends TestCase
 {
     /**
-     * @var ObjectManager|MockObject
+     * @var ObjectManager&MockObject
      */
     private $objectManager;
 
@@ -25,27 +28,24 @@ final class ReferenceRepositoryTest extends TestCase
     }
 
     /**
-     * Assert that the ReferenceRepository is of type \Doctrine\Common\DataFixtures\ReferenceRepository.
-     *
-     * @covers \Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository
+     * Assert that the ReferenceRepository is of type ReferenceRepository
      */
     public function testExtendsReferenceRepository(): void
     {
         $referenceRepository = new ReferenceRepository($this->objectManager);
 
-        $this->assertInstanceOf(\Doctrine\Common\DataFixtures\ReferenceRepository::class, $referenceRepository);
+        $this->assertInstanceOf(ReferenceRepository::class, $referenceRepository);
     }
 
     /**
      * Assert a collection reference can be set and get on a ReferenceRepository via
-     * setCollectionReference() and getCollectionReference().
+     * setCollectionReference() and getCollectionReference()
      *
-     * @covers \Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository::setCollectionReference
-     * @covers \Arp\LaminasDoctrineFixtures\Service\Repository\ReferenceRepository::getCollectionReference
+     * @throws \OutOfBoundsException
      */
     public function testSetAndGetCollectionReference(): void
     {
-        /** @var ReferenceRepository|MockObject $collectionReference */
+        /** @var ReferenceRepository&MockObject $collectionReference */
         $collectionReference = $this->getMockBuilder(ReferenceRepository::class)
             ->setConstructorArgs([$this->objectManager])
             ->onlyMethods(['setReference', 'getReference'])
@@ -53,7 +53,6 @@ final class ReferenceRepositoryTest extends TestCase
 
         $collectionName = 'FooCollection';
 
-        /** @var \stdClass[] $data */
         $data = [
             'A' => new \stdClass(),
             'B' => new \stdClass(),

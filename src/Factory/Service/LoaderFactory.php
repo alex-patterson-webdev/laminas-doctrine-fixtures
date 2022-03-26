@@ -19,14 +19,13 @@ final class LoaderFactory extends AbstractFactory
     /**
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param array|null         $options
+     * @param array<mixed>|null  $options
      *
      * @return Loader
      *
      * @throws ServiceNotCreatedException
-     * @noinspection PhpMissingParamTypeInspection
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): Loader
+    public function __invoke(ContainerInterface $container, string $requestedName, array $options = null): Loader
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 

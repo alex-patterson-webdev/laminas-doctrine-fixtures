@@ -12,5 +12,4 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
  */
 class Executor extends ORMExecutor
 {
-
 }

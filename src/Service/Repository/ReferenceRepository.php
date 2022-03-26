@@ -11,14 +11,16 @@ namespace Arp\LaminasDoctrineFixtures\Service\Repository;
 class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceRepository
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
-    private $collectionReferences = [];
+    private array $collectionReferences = [];
 
     /**
      * @param string $name
      *
-     * @return iterable
+     * @return iterable<mixed>
+     *
+     * @throws \OutOfBoundsException
      */
     public function getCollectionReference(string $name): iterable
     {
@@ -45,8 +47,8 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
     }
 
     /**
-     * @param string   $name
-     * @param iterable $collection
+     * @param string          $name
+     * @param iterable<mixed> $collection
      *
      * @throws \BadFunctionCallException
      */
@@ -64,8 +66,8 @@ class ReferenceRepository extends \Doctrine\Common\DataFixtures\ReferenceReposit
     }
 
     /**
-     * @param string   $name
-     * @param iterable $collection
+     * @param string          $name
+     * @param iterable<mixed> $collection
      */
     public function setCollectionReference(string $name, iterable $collection): void
     {

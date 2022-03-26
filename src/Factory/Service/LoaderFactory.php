@@ -7,8 +7,9 @@ namespace Arp\LaminasDoctrineFixtures\Factory\Service;
 use Arp\LaminasFactory\AbstractFactory;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Loader;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
@@ -24,6 +25,7 @@ final class LoaderFactory extends AbstractFactory
      * @return Loader
      *
      * @throws ServiceNotCreatedException
+     * @throws ContainerExceptionInterface
      */
     public function __invoke(ContainerInterface $container, string $requestedName, array $options = null): Loader
     {

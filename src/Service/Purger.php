@@ -12,5 +12,4 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  */
 class Purger extends ORMPurger
 {
-
 }

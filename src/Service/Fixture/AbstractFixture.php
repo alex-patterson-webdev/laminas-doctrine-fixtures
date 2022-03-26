@@ -30,7 +30,8 @@ abstract class AbstractFixture extends \Doctrine\Common\DataFixtures\AbstractFix
     /**
      * @param string $name
      *
-     * @return iterable
+     * @return iterable<mixed>
+     * @throws \OutOfBoundsException
      */
     public function getCollectionReference(string $name): iterable
     {
@@ -38,8 +39,8 @@ abstract class AbstractFixture extends \Doctrine\Common\DataFixtures\AbstractFix
     }
 
     /**
-     * @param string   $name
-     * @param iterable $collection
+     * @param string          $name
+     * @param iterable<mixed> $collection
      */
     public function setCollectionReference(string $name, iterable $collection): void
     {
@@ -47,8 +48,8 @@ abstract class AbstractFixture extends \Doctrine\Common\DataFixtures\AbstractFix
     }
 
     /**
-     * @param string $name
-     * @param iterable $collection
+     * @param string          $name
+     * @param iterable<mixed> $collection
      */
     public function addCollectionReference(string $name, iterable $collection): void
     {

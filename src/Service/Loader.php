@@ -10,5 +10,4 @@ namespace Arp\LaminasDoctrineFixtures\Service;
  */
 class Loader extends \Doctrine\Common\DataFixtures\Loader
 {
-
 }

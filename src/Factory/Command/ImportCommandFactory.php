@@ -9,7 +9,9 @@ use Arp\LaminasDoctrineFixtures\Service\Executor;
 use Arp\LaminasDoctrineFixtures\Service\Loader;
 use Arp\LaminasFactory\AbstractFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * @author  Alex Patterson <alex.patterson.webdev@gmail.com>
@@ -20,16 +22,19 @@ final class ImportCommandFactory extends AbstractFactory
     /**
      * @var string
      */
-    private $defaultClassName = ImportCommand::class;
+    private string $defaultClassName = ImportCommand::class;
 
     /**
      * @param ContainerInterface $container
      * @param string             $requestedName
-     * @param array|null         $options
+     * @param array<mixed>|null  $options
      *
      * @return ImportCommand
+     *
+     * @throws ServiceNotCreatedException
+     * @throws ContainerExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, string $requestedName, array $options = null): ImportCommand
     {
         $options = $options ?? $this->getServiceOptions($container, $requestedName);
 

@@ -21,17 +21,17 @@ class ImportCommand extends Command
     /**
      * @var FixtureInterface[]
      */
-    private $fixtures;
+    private array $fixtures;
 
     /**
      * @var Executor
      */
-    private $executor;
+    private Executor $executor;
 
     /**
      * @var ORMPurger|null
      */
-    private $purger;
+    private ?ORMPurger $purger;
 
     /**
      * @param FixtureInterface[] $fixtures
@@ -45,6 +45,31 @@ class ImportCommand extends Command
         $this->purger = $purger;
 
         parent::__construct();
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return int|null
+     */
+    public function execute(InputInterface $input, OutputInterface $output): ?int
+    {
+        $output->writeln('Executing data fixtures...');
+
+        $purgeMode = (int)$input->getOption('purge-with-truncate');
+
+        if (null !== $this->purger && $purgeMode) {
+            $output->writeln('Purging existing database data');
+
+            $this->purger->setPurgeMode((2 === $purgeMode) ? 2 : 1);
+        }
+
+        $this->executor->execute($this->fixtures, (bool)$input->getOption('append'));
+
+        $output->writeln(sprintf('Completed execution of \'%d\' fixtures', count($this->fixtures)));
+
+        return 0;
     }
 
     /**
@@ -67,30 +92,5 @@ class ImportCommand extends Command
                 'Truncate tables before inserting data'
             );
         }
-    }
-
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return int|void|null
-     */
-    public function execute(InputInterface $input, OutputInterface $output)
-    {
-        $output->writeln('Executing data fixtures...');
-
-        $purgeMode = (int)$input->getOption('purge-with-truncate');
-
-        if (null !== $this->purger && $purgeMode) {
-            $output->writeln(sprintf('Purging existing database data'));
-
-            $this->purger->setPurgeMode((2 === $purgeMode) ? 2 : 1);
-        }
-
-        $this->executor->execute($this->fixtures, $input->getOption('append') ? true : false);
-
-        $output->writeln(sprintf('Completed execution of \'%d\' fixtures', count($this->fixtures)));
-
-        return 0;
     }
 }
